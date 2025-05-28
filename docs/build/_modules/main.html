@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>main &mdash; ImageOverlayApp 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ImageOverlayApp
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">ImageOverlayApp</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ImageOverlayApp</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">main</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for main</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PySide6.QtWidgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">QApplication</span><span class="p">,</span> <span class="n">QLabel</span><span class="p">,</span> <span class="n">QFileDialog</span><span class="p">,</span> <span class="n">QLineEdit</span><span class="p">,</span> <span class="n">QVBoxLayout</span><span class="p">,</span> <span class="n">QPushButton</span><span class="p">,</span> <span class="n">QWidget</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PySide6.QtGui</span><span class="w"> </span><span class="kn">import</span> <span class="n">QPixmap</span><span class="p">,</span> <span class="n">QImage</span><span class="p">,</span> <span class="n">QColor</span><span class="p">,</span> <span class="n">QIcon</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PySide6.QtCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">Qt</span><span class="p">,</span> <span class="n">QPoint</span>
+
+<div class="viewcode-block" id="TransparentImageWindow">
+<a class="viewcode-back" href="../modules.html#main.TransparentImageWindow">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TransparentImageWindow</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Окно для отображения прозрачного изображения поверх других окон.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        label (QLabel): Виджет для отображения изображения.</span>
+<span class="sd">        dragging (bool): Флаг перетаскивания окна.</span>
+<span class="sd">        drag_offset (QPoint): Смещение при перетаскивании.</span>
+<span class="sd">        interactive (bool): Флаг интерактивности окна.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pixmap</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Инициализация окна с изображением.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            pixmap (QPixmap): Изображение для отображения.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWindowFlags</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">WindowStaysOnTopHint</span> <span class="o">|</span> <span class="n">Qt</span><span class="o">.</span><span class="n">FramelessWindowHint</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">WA_TranslucentBackground</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">pixmap</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">setScaledContents</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">pixmap</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">pixmap</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dragging</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drag_offset</span> <span class="o">=</span> <span class="n">QPoint</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interactive</span> <span class="o">=</span> <span class="kc">True</span>
+
+<div class="viewcode-block" id="TransparentImageWindow.mousePressEvent">
+<a class="viewcode-back" href="../modules.html#main.TransparentImageWindow.mousePressEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Обработка нажатия кнопки мыши.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dragging</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drag_offset</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TransparentImageWindow.mouseMoveEvent">
+<a class="viewcode-back" href="../modules.html#main.TransparentImageWindow.mouseMoveEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Обработка перемещения мыши.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dragging</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span> <span class="o">+</span> <span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">drag_offset</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TransparentImageWindow.mouseReleaseEvent">
+<a class="viewcode-back" href="../modules.html#main.TransparentImageWindow.mouseReleaseEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Обработка отпускания кнопки мыши.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dragging</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="TransparentImageWindow.wheelEvent">
+<a class="viewcode-back" href="../modules.html#main.TransparentImageWindow.wheelEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wheelEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Обработка вращения колесика мыши для масштабирования.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">angleDelta</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">/</span> <span class="mi">8</span>
+            <span class="n">steps</span> <span class="o">=</span> <span class="n">angle</span> <span class="o">/</span> <span class="mi">15</span>
+            <span class="n">factor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">steps</span> <span class="o">*</span> <span class="mf">0.1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="n">factor</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="n">factor</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TransparentImageWindow.updateOpacity">
+<a class="viewcode-back" href="../modules.html#main.TransparentImageWindow.updateOpacity">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">updateOpacity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Обновление прозрачности изображения.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            value (int): Значение прозрачности от 0 до 100.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">opacity</span> <span class="o">=</span> <span class="n">value</span> <span class="o">/</span> <span class="mf">100.0</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">pixmap</span><span class="p">()</span><span class="o">.</span><span class="n">toImage</span><span class="p">()</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">convertToFormat</span><span class="p">(</span><span class="n">QImage</span><span class="o">.</span><span class="n">Format_ARGB32</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">height</span><span class="p">()):</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">width</span><span class="p">()):</span>
+                <span class="n">pixel</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+                <span class="n">alpha</span> <span class="o">=</span> <span class="n">QColor</span><span class="p">(</span><span class="n">pixel</span><span class="p">)</span><span class="o">.</span><span class="n">alpha</span><span class="p">()</span> <span class="o">*</span> <span class="n">opacity</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="n">QColor</span><span class="p">(</span><span class="n">pixel</span><span class="p">)</span>
+                <span class="n">color</span><span class="o">.</span><span class="n">setAlpha</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span>
+                <span class="n">image</span><span class="o">.</span><span class="n">setPixelColor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">QPixmap</span><span class="o">.</span><span class="n">fromImage</span><span class="p">(</span><span class="n">image</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="TransparentImageWindow.setNonInteractive">
+<a class="viewcode-back" href="../modules.html#main.TransparentImageWindow.setNonInteractive">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setNonInteractive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Переключение в неинтерактивный режим.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interactive</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWindowFlags</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">windowFlags</span><span class="p">()</span> <span class="o">|</span> <span class="n">Qt</span><span class="o">.</span><span class="n">WindowTransparentForInput</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TransparentImageWindow.setInteractive">
+<a class="viewcode-back" href="../modules.html#main.TransparentImageWindow.setInteractive">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setInteractive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Переключение в интерактивный режим.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interactive</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWindowFlags</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">windowFlags</span><span class="p">()</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Qt</span><span class="o">.</span><span class="n">WindowTransparentForInput</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TransparentImageWindow.keyPressEvent">
+<a class="viewcode-back" href="../modules.html#main.TransparentImageWindow.keyPressEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Обработка нажатий клавиш.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_T</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_E</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setNonInteractive</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_Y</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_N</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setInteractive</span><span class="p">()</span></div>
+</div>
+
+
+<div class="viewcode-block" id="SettingsWindow">
+<a class="viewcode-back" href="../modules.html#main.SettingsWindow">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SettingsWindow</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Главное окно настроек приложения.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        image_window (TransparentImageWindow): Окно с изображением.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Инициализация окна настроек.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initUI</span><span class="p">()</span>
+
+<div class="viewcode-block" id="SettingsWindow.initUI">
+<a class="viewcode-back" href="../modules.html#main.SettingsWindow.initUI">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">initUI</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Инициализация пользовательского интерфейса.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s1">&#39;Выберите изображение и настройте параметры:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s1">&#39;Выбрать изображение&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loadImage</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">opacity_input</span> <span class="o">=</span> <span class="n">QLineEdit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opacity_input</span><span class="o">.</span><span class="n">setPlaceholderText</span><span class="p">(</span><span class="s1">&#39;Введите прозрачность (%)&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opacity_input</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opacity_input</span><span class="o">.</span><span class="n">returnPressed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changeOpacity</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fix_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s1">&#39;Закрепить изображение (T)&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">fix_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fixImage</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fix_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">unfix_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s1">&#39;Открепить изображение (Y)&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">unfix_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unfixImage</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unfix_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">description_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span>
+            <span class="s1">&#39;Колесико мышки - менять размер</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;Зажатой левой кнопкой мышки - перемещение</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="s1">&#39;T - закрепить картинку</span><span class="se">\n</span><span class="s1">Y - открепить картинку&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+        <span class="n">layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opacity_input</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fix_button</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unfix_button</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description_label</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="SettingsWindow.loadImage">
+<a class="viewcode-back" href="../modules.html#main.SettingsWindow.loadImage">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">loadImage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Загрузка изображения из файла.&quot;&quot;&quot;</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+        <span class="n">filePath</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">.</span><span class="n">getOpenFileName</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;Open Image File&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;Images (*.png *.xpm *.jpg *.bmp *.gif)&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">filePath</span><span class="p">:</span>
+            <span class="n">pixmap</span> <span class="o">=</span> <span class="n">QPixmap</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span> <span class="o">=</span> <span class="n">TransparentImageWindow</span><span class="p">(</span><span class="n">pixmap</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">pixmap</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">pixmap</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">pixmap</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span><span class="o">.</span><span class="n">updateOpacity</span><span class="p">(</span><span class="mi">35</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">opacity_input</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fix_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unfix_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SettingsWindow.changeOpacity">
+<a class="viewcode-back" href="../modules.html#main.SettingsWindow.changeOpacity">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">changeOpacity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Изменение прозрачности изображения.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opacity_input</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+                <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span><span class="o">.</span><span class="n">updateOpacity</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">opacity_input</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">opacity_input</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SettingsWindow.fixImage">
+<a class="viewcode-back" href="../modules.html#main.SettingsWindow.fixImage">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fixImage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Закрепление изображения (неинтерактивный режим).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span><span class="o">.</span><span class="n">setNonInteractive</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fix_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unfix_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SettingsWindow.unfixImage">
+<a class="viewcode-back" href="../modules.html#main.SettingsWindow.unfixImage">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unfixImage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Открепление изображения (интерактивный режим).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">image_window</span><span class="o">.</span><span class="n">setInteractive</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fix_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unfix_button</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../modules.html#main.main">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Точка входа в приложение.&quot;&quot;&quot;</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    
+    <span class="n">app</span><span class="o">.</span><span class="n">setApplicationName</span><span class="p">(</span><span class="s2">&quot;ImageOverlayApp&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">setApplicationDisplayName</span><span class="p">(</span><span class="s2">&quot;Image Overlay Application&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">setWindowIcon</span><span class="p">(</span><span class="n">QIcon</span><span class="p">(</span><span class="s1">&#39;icon.png&#39;</span><span class="p">))</span>
+
+    <span class="n">settings_window</span> <span class="o">=</span> <span class="n">SettingsWindow</span><span class="p">()</span>
+    <span class="n">settings_window</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">quitApp</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Завершение работы приложения.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">settings_window</span><span class="o">.</span><span class="n">image_window</span><span class="p">:</span>
+            <span class="n">settings_window</span><span class="o">.</span><span class="n">image_window</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Обработка глобальных горячих клавиш.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_Q</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_CyrillicShortI</span><span class="p">:</span>
+            <span class="n">quitApp</span><span class="p">()</span>
+    
+    <span class="n">app</span><span class="o">.</span><span class="n">aboutToQuit</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">quitApp</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">keyPressEvent</span> <span class="o">=</span> <span class="n">keyPressEvent</span>
+
+    <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">()</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, isa750870.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

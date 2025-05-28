@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ImageOverlayApp &mdash; ImageOverlayApp 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to ImageOverlayApp’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ImageOverlayApp
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ImageOverlayApp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#main.SettingsWindow"><code class="docutils literal notranslate"><span class="pre">SettingsWindow</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main.SettingsWindow.image_window"><code class="docutils literal notranslate"><span class="pre">SettingsWindow.image_window</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.SettingsWindow.changeOpacity"><code class="docutils literal notranslate"><span class="pre">SettingsWindow.changeOpacity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.SettingsWindow.fixImage"><code class="docutils literal notranslate"><span class="pre">SettingsWindow.fixImage()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.SettingsWindow.initUI"><code class="docutils literal notranslate"><span class="pre">SettingsWindow.initUI()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.SettingsWindow.loadImage"><code class="docutils literal notranslate"><span class="pre">SettingsWindow.loadImage()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.SettingsWindow.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">SettingsWindow.staticMetaObject</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.SettingsWindow.unfixImage"><code class="docutils literal notranslate"><span class="pre">SettingsWindow.unfixImage()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#main.TransparentImageWindow"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main.TransparentImageWindow.label"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow.label</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.TransparentImageWindow.dragging"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow.dragging</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.TransparentImageWindow.drag_offset"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow.drag_offset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.TransparentImageWindow.interactive"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow.interactive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.TransparentImageWindow.keyPressEvent"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow.keyPressEvent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.TransparentImageWindow.mouseMoveEvent"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow.mouseMoveEvent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.TransparentImageWindow.mousePressEvent"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow.mousePressEvent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.TransparentImageWindow.mouseReleaseEvent"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow.mouseReleaseEvent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.TransparentImageWindow.setInteractive"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow.setInteractive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.TransparentImageWindow.setNonInteractive"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow.setNonInteractive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.TransparentImageWindow.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow.staticMetaObject</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.TransparentImageWindow.updateOpacity"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow.updateOpacity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.TransparentImageWindow.wheelEvent"><code class="docutils literal notranslate"><span class="pre">TransparentImageWindow.wheelEvent()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ImageOverlayApp</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ImageOverlayApp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="imageoverlayapp">
+<h1>ImageOverlayApp<a class="headerlink" href="#imageoverlayapp" title="Link to this heading"></a></h1>
+<dl class="py class" id="module-main">
+<dt class="sig sig-object py" id="main.SettingsWindow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">SettingsWindow</span></span><a class="reference internal" href="_modules/main.html#SettingsWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.SettingsWindow" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>Главное окно настроек приложения.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.SettingsWindow.image_window">
+<span class="sig-name descname"><span class="pre">image_window</span></span><a class="headerlink" href="#main.SettingsWindow.image_window" title="Link to this definition"></a></dt>
+<dd><p>Окно с изображением.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#main.TransparentImageWindow" title="main.TransparentImageWindow">TransparentImageWindow</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.SettingsWindow.changeOpacity">
+<span class="sig-name descname"><span class="pre">changeOpacity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#SettingsWindow.changeOpacity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.SettingsWindow.changeOpacity" title="Link to this definition"></a></dt>
+<dd><p>Изменение прозрачности изображения.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.SettingsWindow.fixImage">
+<span class="sig-name descname"><span class="pre">fixImage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#SettingsWindow.fixImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.SettingsWindow.fixImage" title="Link to this definition"></a></dt>
+<dd><p>Закрепление изображения (неинтерактивный режим).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.SettingsWindow.initUI">
+<span class="sig-name descname"><span class="pre">initUI</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#SettingsWindow.initUI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.SettingsWindow.initUI" title="Link to this definition"></a></dt>
+<dd><p>Инициализация пользовательского интерфейса.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.SettingsWindow.loadImage">
+<span class="sig-name descname"><span class="pre">loadImage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#SettingsWindow.loadImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.SettingsWindow.loadImage" title="Link to this definition"></a></dt>
+<dd><p>Загрузка изображения из файла.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.SettingsWindow.staticMetaObject">
+<span class="sig-name descname"><span class="pre">staticMetaObject</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">PySide6.QtCore.QMetaObject(&quot;SettingsWindow&quot;</span> <span class="pre">inherits</span> <span class="pre">&quot;QWidget&quot;:</span> <span class="pre">)</span></em><a class="headerlink" href="#main.SettingsWindow.staticMetaObject" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.SettingsWindow.unfixImage">
+<span class="sig-name descname"><span class="pre">unfixImage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#SettingsWindow.unfixImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.SettingsWindow.unfixImage" title="Link to this definition"></a></dt>
+<dd><p>Открепление изображения (интерактивный режим).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="main.TransparentImageWindow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">TransparentImageWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pixmap</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#TransparentImageWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.TransparentImageWindow" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QWidget</span></code></p>
+<p>Окно для отображения прозрачного изображения поверх других окон.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.TransparentImageWindow.label">
+<span class="sig-name descname"><span class="pre">label</span></span><a class="headerlink" href="#main.TransparentImageWindow.label" title="Link to this definition"></a></dt>
+<dd><p>Виджет для отображения изображения.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QLabel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.TransparentImageWindow.dragging">
+<span class="sig-name descname"><span class="pre">dragging</span></span><a class="headerlink" href="#main.TransparentImageWindow.dragging" title="Link to this definition"></a></dt>
+<dd><p>Флаг перетаскивания окна.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.TransparentImageWindow.drag_offset">
+<span class="sig-name descname"><span class="pre">drag_offset</span></span><a class="headerlink" href="#main.TransparentImageWindow.drag_offset" title="Link to this definition"></a></dt>
+<dd><p>Смещение при перетаскивании.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QPoint</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.TransparentImageWindow.interactive">
+<span class="sig-name descname"><span class="pre">interactive</span></span><a class="headerlink" href="#main.TransparentImageWindow.interactive" title="Link to this definition"></a></dt>
+<dd><p>Флаг интерактивности окна.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.TransparentImageWindow.keyPressEvent">
+<span class="sig-name descname"><span class="pre">keyPressEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#TransparentImageWindow.keyPressEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.TransparentImageWindow.keyPressEvent" title="Link to this definition"></a></dt>
+<dd><p>Обработка нажатий клавиш.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.TransparentImageWindow.mouseMoveEvent">
+<span class="sig-name descname"><span class="pre">mouseMoveEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#TransparentImageWindow.mouseMoveEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.TransparentImageWindow.mouseMoveEvent" title="Link to this definition"></a></dt>
+<dd><p>Обработка перемещения мыши.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.TransparentImageWindow.mousePressEvent">
+<span class="sig-name descname"><span class="pre">mousePressEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#TransparentImageWindow.mousePressEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.TransparentImageWindow.mousePressEvent" title="Link to this definition"></a></dt>
+<dd><p>Обработка нажатия кнопки мыши.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.TransparentImageWindow.mouseReleaseEvent">
+<span class="sig-name descname"><span class="pre">mouseReleaseEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#TransparentImageWindow.mouseReleaseEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.TransparentImageWindow.mouseReleaseEvent" title="Link to this definition"></a></dt>
+<dd><p>Обработка отпускания кнопки мыши.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.TransparentImageWindow.setInteractive">
+<span class="sig-name descname"><span class="pre">setInteractive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#TransparentImageWindow.setInteractive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.TransparentImageWindow.setInteractive" title="Link to this definition"></a></dt>
+<dd><p>Переключение в интерактивный режим.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.TransparentImageWindow.setNonInteractive">
+<span class="sig-name descname"><span class="pre">setNonInteractive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#TransparentImageWindow.setNonInteractive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.TransparentImageWindow.setNonInteractive" title="Link to this definition"></a></dt>
+<dd><p>Переключение в неинтерактивный режим.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.TransparentImageWindow.staticMetaObject">
+<span class="sig-name descname"><span class="pre">staticMetaObject</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">PySide6.QtCore.QMetaObject(&quot;TransparentImageWindow&quot;</span> <span class="pre">inherits</span> <span class="pre">&quot;QWidget&quot;:</span> <span class="pre">)</span></em><a class="headerlink" href="#main.TransparentImageWindow.staticMetaObject" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.TransparentImageWindow.updateOpacity">
+<span class="sig-name descname"><span class="pre">updateOpacity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#TransparentImageWindow.updateOpacity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.TransparentImageWindow.updateOpacity" title="Link to this definition"></a></dt>
+<dd><p>Обновление прозрачности изображения.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – Значение прозрачности от 0 до 100.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.TransparentImageWindow.wheelEvent">
+<span class="sig-name descname"><span class="pre">wheelEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#TransparentImageWindow.wheelEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.TransparentImageWindow.wheelEvent" title="Link to this definition"></a></dt>
+<dd><p>Обработка вращения колесика мыши для масштабирования.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.main">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.main" title="Link to this definition"></a></dt>
+<dd><p>Точка входа в приложение.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to ImageOverlayApp’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, isa750870.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
